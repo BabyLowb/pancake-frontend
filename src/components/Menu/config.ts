@@ -2,12 +2,12 @@ import { MenuEntry } from '@pancakeswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
 
 const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
-  {
+  /* {
     label: t('Home'),
     icon: 'HomeIcon',
     href: '/',
-  },
-  {
+  }, */
+  /* {
     label: t('Trade'),
     icon: 'TradeIcon',
     items: [
@@ -24,18 +24,18 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         href: 'https://v1exchange.pancakeswap.finance/#/migrate',
       },
     ],
-  },
-  {
+  }, */
+ /*  {
     label: t('Farms'),
     icon: 'FarmIcon',
     href: '/farms',
-  },
+  }, */
   {
     label: t('Pools'),
     icon: 'PoolIcon',
     href: '/pools',
   },
-  {
+  /* {
     label: t('Prediction (BETA)'),
     icon: 'PredictionsIcon',
     href: '/prediction',
@@ -82,8 +82,8 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     label: t('IFO'),
     icon: 'IfoIcon',
     href: '/ifo',
-  },
-  {
+  }, */
+  /* {
     label: t('More'),
     icon: 'MoreIcon',
     items: [
@@ -112,7 +112,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         href: 'https://pancakeswap.creator-spring.com/',
       },
     ],
-  },
+  }, */
 ]
 
 export default config

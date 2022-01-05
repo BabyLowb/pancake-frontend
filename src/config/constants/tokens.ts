@@ -3,10 +3,10 @@ import { ChainId, Token } from '@pancakeswap/sdk'
 export const CAKE: { [chainId: number]: Token } = {
   [ChainId.MAINNET]: new Token(
     ChainId.MAINNET,
-    '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
-    18,
-    'CAKE',
-    'PancakeSwap Token',
+    '0x20dd7F9FaF67D1991911c50BE8cC547184097518',
+    9,
+    'FUBI',
+    'FreeUbi Token',
   ),
   [ChainId.TESTNET]: new Token(
     ChainId.TESTNET,
@@ -65,12 +65,12 @@ const tokens = {
     projectLink: 'https://www.binance.com/',
   },
   cake: {
-    symbol: 'CAKE',
+    symbol: 'FUBI',
     address: {
-      56: '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
+      56: '0x20dd7F9FaF67D1991911c50BE8cC547184097518',
       97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     },
-    decimals: 18,
+    decimals: 9,
     projectLink: 'https://pancakeswap.finance/',
   },
   qbt: {
