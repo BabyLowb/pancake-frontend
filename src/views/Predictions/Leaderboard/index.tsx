@@ -5,7 +5,6 @@ import { useGetLeaderboardFilters, useGetLeaderboardLoadingState } from 'state/p
 import { LeaderboardLoadingState } from 'state/types'
 import { filterLeaderboard } from 'state/predictions'
 import PageLoader from 'components/Loader/PageLoader'
-import { PageMeta } from 'components/Layout/Page'
 import Hero from './components/Hero'
 import Results from './components/Results'
 import ConnectedWalletResult from './components/Results/ConnectedWalletResult'
@@ -27,7 +26,6 @@ const Leaderboard = () => {
 
   return (
     <>
-      <PageMeta />
       <Hero />
       <Filters />
       <ConnectedWalletResult />

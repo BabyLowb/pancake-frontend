@@ -10,12 +10,11 @@ export const useGetCollectibles = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
   const { isInitialized, isLoading, data } = useSelector((state: State) => state.collectibles)
-
   const identifiers = Object.keys(data)
 
   useEffect(() => {
     // Fetch nfts only if we have not done so already
-    if (!isInitialized && account) {
+    if (!isInitialized) {
       dispatch(fetchWalletNfts(account))
     }
   }, [isInitialized, account, dispatch])
@@ -24,6 +23,6 @@ export const useGetCollectibles = () => {
     isInitialized,
     isLoading,
     tokenIds: data,
-    nftsInWallet: Nfts.pancake.filter((nft) => identifiers.includes(nft.identifier)),
+    nftsInWallet: Nfts.filter((nft) => identifiers.includes(nft.identifier)),
   }
 }

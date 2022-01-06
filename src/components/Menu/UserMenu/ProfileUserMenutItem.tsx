@@ -31,7 +31,7 @@ const ProfileUserMenuItem: React.FC<ProfileUserMenuItemProps> = ({ isLoading, ha
     )
   }
 
-  if (!hasProfile) {
+ /*  if (!hasProfile) {
     return (
       <UserMenuItem as="button" onClick={handleClick}>
         <Flex alignItems="center" justifyContent="space-between" width="100%">
@@ -40,10 +40,10 @@ const ProfileUserMenuItem: React.FC<ProfileUserMenuItemProps> = ({ isLoading, ha
         </Flex>
       </UserMenuItem>
     )
-  }
+  } */
 
   return (
-    <UserMenuItem as="button" onClick={handleClick}>
+    <UserMenuItem as="button"/*  onClick={handleClick} */>
       {t('Your Profile')}
     </UserMenuItem>
   )

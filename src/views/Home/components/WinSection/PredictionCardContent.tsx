@@ -6,8 +6,7 @@ import { formatLocalisedCompactNumber } from 'utils/formatBalance'
 import useRefresh from 'hooks/useRefresh'
 import useIntersectionObserver from 'hooks/useIntersectionObserver'
 import { getTotalWon } from 'state/predictions/helpers'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
-import { multiplyPriceByAmount } from 'utils/prices'
+import { usePriceBnbBusd } from 'state/farms/hooks'
 
 const StyledLink = styled(Link)`
   width: 100%;
@@ -18,9 +17,9 @@ const PredictionCardContent = () => {
   const { slowRefresh } = useRefresh()
   const { observerRef, isIntersecting } = useIntersectionObserver()
   const [loadData, setLoadData] = useState(false)
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = usePriceBnbBusd()
   const [bnbWon, setBnbWon] = useState(0)
-  const bnbWonInUsd = multiplyPriceByAmount(bnbBusdPrice, bnbWon)
+  const [bnbWonInUsd, setBnbWonInUsd] = useState(0)
 
   const localisedBnbUsdString = formatLocalisedCompactNumber(bnbWonInUsd)
   const bnbWonText = t('$%bnbWonInUsd% in BNB won so far', { bnbWonInUsd: localisedBnbUsdString })
@@ -43,9 +42,16 @@ const PredictionCardContent = () => {
     }
   }, [slowRefresh, loadData])
 
+  useEffect(() => {
+    if (bnbBusdPrice.gt(0) && bnbWon > 0) {
+      setBnbWonInUsd(bnbBusdPrice.times(bnbWon).toNumber())
+    }
+  }, [bnbBusdPrice, bnbWon])
+
   return (
     <>
       <Flex flexDirection="column" mt="48px">
+        <div ref={observerRef} />
         <Text color="#280D5F" bold fontSize="16px">
           {t('Prediction')}
         </Text>

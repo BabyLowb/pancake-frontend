@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import BigNumber from 'bignumber.js'
 import {
   Card,
   CardBody,
@@ -17,13 +18,12 @@ import {
 } from '@pancakeswap/uikit'
 import { parseISO, formatDistance } from 'date-fns'
 import { useWeb3React } from '@web3-react/core'
-import { formatUnits } from '@ethersproject/units'
-import { API_PROFILE } from 'config/constants/endpoints'
 import useToast from 'hooks/useToast'
-import { FetchStatus, useGetCakeBalance } from 'hooks/useTokenBalance'
 import { signMessage } from 'utils/web3React'
 import useWeb3Provider from 'hooks/useActiveWeb3React'
 import { useTranslation } from 'contexts/Localization'
+import useHasCakeBalance from 'hooks/useHasCakeBalance'
+import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import debounce from 'lodash/debounce'
 import ConfirmProfileCreationModal from '../components/ConfirmProfileCreationModal'
 import useProfileCreation from './contexts/hook'
@@ -34,6 +34,9 @@ enum ExistingUserState {
   CREATED = 'created', // username has already been created
   NEW = 'new', // username has not been created
 }
+
+const profileApiUrl = process.env.REACT_APP_API_PROFILE
+const minimumCakeToRegister = new BigNumber(REGISTER_COST).multipliedBy(DEFAULT_TOKEN_DECIMAL)
 
 const InputWrap = styled.div`
   position: relative;
@@ -66,8 +69,7 @@ const UserName: React.FC = () => {
   const [isValid, setIsValid] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const { balance: cakeBalance, fetchStatus } = useGetCakeBalance()
-  const hasMinimumCakeRequired = fetchStatus === FetchStatus.SUCCESS && cakeBalance.gte(REGISTER_COST)
+  const hasMinimumCakeRequired = useHasCakeBalance(minimumCakeToRegister)
   const [onPresentConfirmProfileCreation] = useModal(
     <ConfirmProfileCreationModal
       userName={userName}
@@ -84,7 +86,7 @@ const UserName: React.FC = () => {
   const checkUsernameValidity = debounce(async (value: string) => {
     try {
       setIsLoading(true)
-      const res = await fetch(`${API_PROFILE}/api/users/valid/${value}`)
+      const res = await fetch(`${profileApiUrl}/api/users/valid/${value}`)
 
       if (res.ok) {
         setIsValid(true)
@@ -110,7 +112,7 @@ const UserName: React.FC = () => {
       setIsLoading(true)
 
       const signature = await signMessage(library, account, userName)
-      const response = await fetch(`${API_PROFILE}/api/users/register`, {
+      const response = await fetch(`${profileApiUrl}/api/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,7 +143,7 @@ const UserName: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${API_PROFILE}/api/users/${account}`)
+        const response = await fetch(`${profileApiUrl}/api/users/${account}`)
         const data = await response.json()
 
         if (response.ok) {
@@ -236,7 +238,7 @@ const UserName: React.FC = () => {
       </Button>
       {!hasMinimumCakeRequired && (
         <Text color="failure" mt="16px">
-          {t('A minimum of %num% CAKE is required', { num: formatUnits(REGISTER_COST) })}
+          {t('A minimum of %num% CAKE is required', { num: REGISTER_COST })}
         </Text>
       )}
     </>

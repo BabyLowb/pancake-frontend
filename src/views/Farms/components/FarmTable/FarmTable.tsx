@@ -71,7 +71,7 @@ const FarmTable: React.FC<ITableProps> = (props) => {
   }
 
   return (
-    <Container id="farms-table">
+    <Container>
       <TableContainer>
         <TableWrapper ref={tableWrapperEl}>
           <StyledTable>

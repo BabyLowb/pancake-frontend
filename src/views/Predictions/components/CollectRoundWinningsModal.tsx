@@ -18,18 +18,16 @@ import {
 } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from 'state'
+import { usePriceBnbBusd } from 'state/farms/hooks'
 import { REWARD_RATE } from 'state/predictions/config'
 import { fetchNodeHistory, markAsCollected } from 'state/predictions'
 import { Bet } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
 import useToast from 'hooks/useToast'
 import { usePredictionsContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { useGetHistory, useGetIsFetchingHistory } from 'state/predictions/hooks'
-import { multiplyPriceByAmount } from 'utils/prices'
-import { formatNumber } from 'utils/formatBalance'
 import { getPayout } from './History/helpers'
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
@@ -82,13 +80,12 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({ o
   const { toastSuccess, toastError } = useToast()
   const { callWithGasPrice } = useCallWithGasPrice()
   const predictionsContract = usePredictionsContract()
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = usePriceBnbBusd()
   const dispatch = useAppDispatch()
   const isLoadingHistory = useGetIsFetchingHistory()
   const history = useGetHistory()
 
   const { epochs, total } = calculateClaimableRounds(history)
-  const totalBnb = multiplyPriceByAmount(bnbBusdPrice, total)
 
   useEffect(() => {
     // Fetch history if they have not opened the history pane yet
@@ -151,9 +148,9 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({ o
         <Flex alignItems="start" justifyContent="space-between" mb="8px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${formatNumber(total, 0, 4)} BNB`}</Text>
+            <Text>{`${total.toFixed(4)} BNB`}</Text>
             <Text fontSize="12px" color="textSubtle">
-              {`~$${totalBnb.toFixed(2)}`}
+              {`~$${bnbBusdPrice.times(total).toFormat(2)}`}
             </Text>
           </Box>
         </Flex>

@@ -7,15 +7,15 @@ import { useProfile } from 'state/profile/hooks'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import { fetchProfile } from 'state/profile'
-import { getBunnyNftAddress } from 'utils/collectibles'
+import { getAddressByType } from 'utils/collectibles'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { getErc721Contract } from 'utils/contractHelpers'
 import { useProfile as useProfileContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { getPancakeProfileAddress } from 'utils/addressHelpers'
 import { ToastDescriptionWithTx } from 'components/Toast'
-import ApproveConfirmButtons from 'components/ApproveConfirmButtons'
 import SelectionCard from '../SelectionCard'
+import ApproveConfirmButtons from '../ApproveConfirmButtons'
 
 type ChangeProfilePicPageProps = InjectedModalProps
 
@@ -68,7 +68,7 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
           const handleChange = (value: string) => {
             setSelectedNft({
               tokenId: Number(value),
-              nftAddress: getBunnyNftAddress(),
+              nftAddress: getAddressByType(walletNft.type),
             })
           }
 

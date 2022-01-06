@@ -1,8 +1,7 @@
 import React from 'react'
 import { Modal, Flex, Text } from '@pancakeswap/uikit'
-import { ethers } from 'ethers'
-import { formatUnits } from '@ethersproject/units'
 import { useAppDispatch } from 'state'
+import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { useCake, useProfile } from 'hooks/useContract'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
@@ -10,8 +9,8 @@ import { fetchProfile } from 'state/profile'
 import useToast from 'hooks/useToast'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { ToastDescriptionWithTx } from 'components/Toast'
-import ApproveConfirmButtons from 'components/ApproveConfirmButtons'
 import { REGISTER_COST } from '../ProfileCreation/config'
+import ApproveConfirmButtons from './ApproveConfirmButtons'
 import { State } from '../ProfileCreation/contexts/types'
 
 interface Props {
@@ -19,8 +18,8 @@ interface Props {
   selectedNft: State['selectedNft']
   account: string
   teamId: number
-  minimumCakeRequired: ethers.BigNumber
-  allowance: ethers.BigNumber
+  minimumCakeRequired: BigNumber
+  allowance: BigNumber
   onDismiss?: () => void
 }
 
@@ -44,7 +43,8 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
       onRequiresApproval: async () => {
         try {
           const response = await cakeContract.allowance(account, profileContract.address)
-          return response.gte(minimumCakeRequired)
+          const currentAllowance = new BigNumber(response.toString())
+          return currentAllowance.gte(minimumCakeRequired)
         } catch (error) {
           return false
         }
@@ -69,7 +69,7 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
       </Text>
       <Flex justifyContent="space-between" mb="16px">
         <Text>{t('Cost')}</Text>
-        <Text>{t('%num% CAKE', { num: formatUnits(REGISTER_COST) })}</Text>
+        <Text>{t('%num% CAKE', { num: REGISTER_COST })}</Text>
       </Flex>
       <ApproveConfirmButtons
         isApproveDisabled={isConfirmed || isConfirming || isApproved}

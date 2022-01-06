@@ -3,7 +3,6 @@ import { Router, Redirect, Route, Switch } from 'react-router-dom'
 import { ResetCSS } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
-import useScrollOnRouteChange from 'hooks/useScrollOnRouteChange'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
 import { useFetchProfile } from 'state/profile/hooks'
@@ -49,7 +48,6 @@ const AddLiquidity = lazy(() => import('./views/AddLiquidity'))
 const Liquidity = lazy(() => import('./views/Pool'))
 const PoolFinder = lazy(() => import('./views/PoolFinder'))
 const RemoveLiquidity = lazy(() => import('./views/RemoveLiquidity'))
-const Info = lazy(() => import('./views/Info'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -62,7 +60,6 @@ const App: React.FC = () => {
   useEagerConnect()
   useFetchProfile()
   usePollCoreFarmData()
-  useScrollOnRouteChange()
 
   return (
     <Router history={history}>
@@ -73,7 +70,7 @@ const App: React.FC = () => {
         <SuspenseWithChunkError fallback={<PageLoader />}>
           <Switch>
             <Route path="/" exact>
-              <Home />
+               <Pools />
             </Route>
             <Route exact path="/farms/auction">
               <FarmAuction />
@@ -119,10 +116,6 @@ const App: React.FC = () => {
             </Route>
             <Route path="/voting/proposal/:id">
               <Proposal />
-            </Route>
-            {/* Info pages */}
-            <Route path="/info">
-              <Info />
             </Route>
 
             {/* Using this format because these components use routes injected props. We need to rework them with hooks */}

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ProfileState } from 'state/types'
 import type { AppDispatch } from 'state'
-import { Nft } from 'config/constants/nfts/types'
+import { Nft } from 'config/constants/types'
 import { getProfile, getProfileAvatar, GetProfileResponse, getUsername } from './helpers'
 
 const initialState: ProfileState = {
@@ -94,8 +94,7 @@ export const fetchProfile = (address: string) => async (dispatch: AppDispatch) =
     dispatch(profileFetchStart())
     const response = await getProfile(address)
     dispatch(profileFetchSucceeded(response))
-  } catch (e) {
-    console.error(e)
+  } catch (error) {
     dispatch(profileFetchFailed())
   }
 }

@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from 'ethers'
-import { BetPosition, NodeRound } from 'state/types'
+import { NodeRound } from 'state/types'
 import { formatBigNumberToFixed } from 'utils/formatBalance'
 import getTimePeriods from 'utils/getTimePeriods'
 
@@ -83,16 +83,4 @@ export const getPriceDifference = (price: ethers.BigNumber, lockPrice: ethers.Bi
   }
 
   return price.sub(lockPrice)
-}
-
-export const getRoundPosition = (lockPrice: ethers.BigNumber, closePrice: ethers.BigNumber) => {
-  if (!closePrice) {
-    return null
-  }
-
-  if (closePrice.eq(lockPrice)) {
-    return BetPosition.HOUSE
-  }
-
-  return closePrice.gt(lockPrice) ? BetPosition.BULL : BetPosition.BEAR
 }

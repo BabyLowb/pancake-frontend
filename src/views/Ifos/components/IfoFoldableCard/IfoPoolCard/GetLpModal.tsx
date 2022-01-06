@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, ModalBody, Text, Image, Button, Link, OpenNewIcon } from '@pancakeswap/uikit'
-import { Token } from '@pancakeswap/sdk'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
+import { Token } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 
 interface Props {
@@ -26,7 +26,7 @@ const GetLpModal: React.FC<Partial<Props>> = ({ currency, onDismiss }) => {
         <Button
           as={Link}
           external
-          href={`${BASE_ADD_LIQUIDITY_URL}/BNB/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82`}
+          href={`${BASE_ADD_LIQUIDITY_URL}/BNB/0x20dd7F9FaF67D1991911c50BE8cC547184097518`}
           endIcon={<OpenNewIcon color="white" />}
           minWidth="100%" // Bypass the width="fit-content" on Links
         >

@@ -18,7 +18,7 @@ import {
 } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useProfile } from 'state/profile/hooks'
-import { useUserUsernameVisibility } from 'state/user/hooks'
+import usePersistState from 'hooks/usePersistState'
 import { getBscScanLink } from 'utils'
 import Menu from './components/Menu'
 import CardHeader from './components/CardHeader'
@@ -84,7 +84,9 @@ const Section = styled.div`
 const PublicProfile = () => {
   const { account } = useWeb3React()
   const { profile } = useProfile()
-  const [usernameVisibilityToggled, setUsernameVisibility] = useUserUsernameVisibility()
+  const [usernameVisibilityToggled, setUsernameVisibility] = usePersistState(false, {
+    localStorageKey: 'username_visibility_toggled',
+  })
   const { t } = useTranslation()
 
   if (!account) {

@@ -52,11 +52,11 @@
     },
     {
       "name": "PancakeSwap Token",
-      "symbol": "CAKE",
-      "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+      "symbol": "FUBI",
+      "address": "0x20dd7F9FaF67D1991911c50BE8cC547184097518",
       "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://pancakeswap.finance/images/tokens/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82.png"
+      "decimals": 9,
+      "logoURI": "/images/tokens/0x20dd7F9FaF67D1991911c50BE8cC547184097518.png"
     },
     {
       "name": "Venus",

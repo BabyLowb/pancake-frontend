@@ -31,14 +31,13 @@ import Container from 'components/Layout/Container'
 import { DatePicker, TimePicker } from 'components/DatePicker'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import ReactMarkdown from 'components/ReactMarkdown'
-import { PageMeta } from 'components/Layout/Page'
 import { sendSnapshotData, Message, generateMetaData, generatePayloadData } from '../helpers'
 import Layout from '../components/Layout'
 import { FormErrors, Label, SecondaryLabel } from './styles'
 import Choices, { Choice, makeChoice, MINIMUM_CHOICES } from './Choices'
 import { combineDateAndTime, getFormErrors } from './helpers'
 import { FormState } from './types'
-import { ADMINS, VOTE_THRESHOLD } from '../config'
+import { ADMIN_ADDRESS, VOTE_THRESHOLD } from '../config'
 import VoteDetailsModal from '../components/VoteDetailsModal'
 
 const EasyMde = lazy(() => import('components/EasyMde'))
@@ -144,9 +143,7 @@ const CreateProposal = () => {
 
   const options = useMemo(
     () => ({
-      hideIcons: ADMINS.includes(account.toLowerCase())
-        ? []
-        : ['guide', 'fullscreen', 'preview', 'side-by-side', 'image'],
+      hideIcons: account === ADMIN_ADDRESS ? [] : ['guide', 'fullscreen', 'preview', 'side-by-side', 'image'],
     }),
     [account],
   )
@@ -162,7 +159,6 @@ const CreateProposal = () => {
 
   return (
     <Container py="40px">
-      <PageMeta />
       <Box mb="48px">
         <Breadcrumbs>
           <Link to="/">{t('Home')}</Link>

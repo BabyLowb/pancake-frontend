@@ -2,18 +2,7 @@ import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from '@reduxjs/toolkit'
 import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
-import {
-  CampaignType,
-  SerializedFarmConfig,
-  LotteryStatus,
-  LotteryTicket,
-  DeserializedPoolConfig,
-  SerializedPoolConfig,
-  Team,
-  TranslatableText,
-  DeserializedFarmConfig,
-} from 'config/constants/types'
-import { Nft } from 'config/constants/nfts/types'
+import { CampaignType, FarmConfig, LotteryStatus, LotteryTicket, Nft, PoolConfig, Team } from 'config/constants/types'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
 
@@ -22,72 +11,48 @@ export interface BigNumberToJson {
   hex: string
 }
 
+export type TranslatableText =
+  | string
+  | {
+      key: string
+      data?: {
+        [key: string]: string | number
+      }
+    }
+
 export type SerializedBigNumber = string
 
-interface SerializedFarmUserData {
-  allowance: string
-  tokenBalance: string
-  stakedBalance: string
-  earnings: string
-}
-
-export interface DeserializedFarmUserData {
-  allowance: BigNumber
-  tokenBalance: BigNumber
-  stakedBalance: BigNumber
-  earnings: BigNumber
-}
-
-export interface SerializedFarm extends SerializedFarmConfig {
-  tokenPriceBusd?: string
-  quoteTokenPriceBusd?: string
+export interface Farm extends FarmConfig {
+  tokenAmountMc?: SerializedBigNumber
+  quoteTokenAmountMc?: SerializedBigNumber
   tokenAmountTotal?: SerializedBigNumber
+  quoteTokenAmountTotal?: SerializedBigNumber
   lpTotalInQuoteToken?: SerializedBigNumber
   lpTotalSupply?: SerializedBigNumber
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
-  userData?: SerializedFarmUserData
+  userData?: {
+    allowance: string
+    tokenBalance: string
+    stakedBalance: string
+    earnings: string
+  }
 }
 
-export interface DeserializedFarm extends DeserializedFarmConfig {
-  tokenPriceBusd?: string
-  quoteTokenPriceBusd?: string
-  tokenAmountTotal?: BigNumber
-  lpTotalInQuoteToken?: BigNumber
-  lpTotalSupply?: BigNumber
-  tokenPriceVsQuote?: BigNumber
-  poolWeight?: BigNumber
-  userData?: DeserializedFarmUserData
-}
-
-interface CorePoolProps {
+export interface Pool extends PoolConfig {
+  totalStaked?: BigNumber
+  stakingLimit?: BigNumber
   startBlock?: number
   endBlock?: number
   apr?: number
   stakingTokenPrice?: number
   earningTokenPrice?: number
   isAutoVault?: boolean
-}
-
-export interface DeserializedPool extends DeserializedPoolConfig, CorePoolProps {
-  totalStaked?: BigNumber
-  stakingLimit?: BigNumber
   userData?: {
     allowance: BigNumber
     stakingTokenBalance: BigNumber
     stakedBalance: BigNumber
     pendingReward: BigNumber
-  }
-}
-
-export interface SerializedPool extends SerializedPoolConfig, CorePoolProps {
-  totalStaked?: SerializedBigNumber
-  stakingLimit?: SerializedBigNumber
-  userData?: {
-    allowance: SerializedBigNumber
-    stakingTokenBalance: SerializedBigNumber
-    stakedBalance: SerializedBigNumber
-    pendingReward: SerializedBigNumber
   }
 }
 
@@ -106,14 +71,8 @@ export interface Profile {
 
 // Slices states
 
-export interface SerializedFarmsState {
-  data: SerializedFarm[]
-  loadArchivedFarmsData: boolean
-  userDataLoaded: boolean
-}
-
-export interface DeserializedFarmsState {
-  data: DeserializedFarm[]
+export interface FarmsState {
+  data: Farm[]
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
 }
@@ -143,7 +102,7 @@ export interface CakeVault {
 }
 
 export interface PoolsState {
-  data: SerializedPool[]
+  data: Pool[]
   cakeVault: CakeVault
   userDataLoaded: boolean
 }
@@ -566,7 +525,7 @@ export type UserTicketsResponse = [ethers.BigNumber[], number[], boolean[]]
 export interface State {
   achievements: AchievementState
   block: BlockState
-  farms: SerializedFarmsState
+  farms: FarmsState
   pools: PoolsState
   predictions: PredictionsState
   profile: ProfileState

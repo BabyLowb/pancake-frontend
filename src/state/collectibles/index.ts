@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { CollectiblesState } from 'state/types'
-import collections from 'config/constants/nfts/collections'
+import { nftSources } from 'config/constants/nfts'
+import { NftType } from 'config/constants/types'
 import { getAddress } from 'utils/addressHelpers'
 import { getErc721Contract } from 'utils/contractHelpers'
 import { getNftByTokenId } from 'utils/collectibles'
@@ -19,16 +20,10 @@ export const fetchWalletNfts = createAsyncThunk<NftSourceItem[], string>(
   'collectibles/fetchWalletNfts',
   async (account) => {
     // For each nft source get nft data
-    const nftSourcePromises = Object.keys(collections).map(async (nftSourceType) => {
-      const { address: addressObj } = collections[nftSourceType]
+    const nftSourcePromises = Object.keys(nftSources).map(async (nftSourceType) => {
+      const { address: addressObj } = nftSources[nftSourceType as NftType]
       const address = getAddress(addressObj)
       const contract = getErc721Contract(address)
-      const balanceOfResponse = await contract.balanceOf(account)
-      const balanceOf = balanceOfResponse.toNumber()
-
-      if (balanceOfResponse.eq(0)) {
-        return []
-      }
 
       const getTokenIdAndData = async (index: number) => {
         try {
@@ -41,6 +36,13 @@ export const fetchWalletNfts = createAsyncThunk<NftSourceItem[], string>(
           console.error('getTokenIdAndData', error)
           return null
         }
+      }
+
+      const balanceOfResponse = await contract.balanceOf(account)
+      const balanceOf = balanceOfResponse.toNumber()
+
+      if (balanceOf === 0) {
+        return []
       }
 
       const nftDataFetchPromises = []
