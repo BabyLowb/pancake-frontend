@@ -57,6 +57,12 @@ const GlobalStyle = createGlobalStyle`
   .eEDEHF {display:none!important}
   .fOIjHO {  background: transparent url(/images/menu-bg.png) right center no-repeat ; }
   .cBoHoo {  background: transparent url(/images/menu-bg.png) right center no-repeat ; }
+  
+  .buWcDL {    background: transparent url(/images/bg-swap.png) right center no-repeat!important;  }
+  
+  .iYykqF {    background: transparent url(/images/bg-swap.png) right center no-repeat!important;  }
+
+  
 `
 
 export default GlobalStyle

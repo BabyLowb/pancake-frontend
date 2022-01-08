@@ -2,7 +2,7 @@ import { ContextApi } from 'contexts/Localization/types'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-  title: 'FreeUbiDao',
+  title: 'FreeUbiSwap',
   description:
     'The most popular AMM on BSC by user count! Earn FUBI',
   image: 'http://swap.freeubi.org/images/bg-farm.png',

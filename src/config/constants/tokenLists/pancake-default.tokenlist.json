@@ -1,5 +1,5 @@
 {
-  "name": "PancakeSwap Default List",
+  "name": "FreeUbiSwap Default List",
   "timestamp": "2021-05-06T00:00:00Z",
   "version": {
     "major": 3,
@@ -51,12 +51,12 @@
       "logoURI": "https://pancakeswap.finance/images/tokens/0x55d398326f99059ff775485246999027b3197955.png"
     },
     {
-      "name": "PancakeSwap Token",
+      "name": "FreeUbiSwap Token",
       "symbol": "FUBI",
       "address": "0x20dd7F9FaF67D1991911c50BE8cC547184097518",
       "chainId": 56,
       "decimals": 9,
-      "logoURI": "/images/tokens/0x20dd7F9FaF67D1991911c50BE8cC547184097518.png"
+      "logoURI": "https://swap.freeubi.org/images/tokens/0x20dd7F9FaF67D1991911c50BE8cC547184097518.png"
     },
     {
       "name": "Venus",

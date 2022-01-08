@@ -7,6 +7,7 @@ import { useTranslation } from 'contexts/Localization'
 const StyledNav = styled.nav`
   margin-bottom: 40px;
 `
+ 
 
 const getActiveIndex = (pathname: string): number => {
   if (
@@ -28,7 +29,7 @@ const Nav = () => {
   return (
     <StyledNav>
       <ButtonMenu activeIndex={getActiveIndex(location.pathname)} scale="sm" variant="subtle">
-        <ButtonMenuItem id="swap-nav-link" to="/swap" as={Link}>
+        <ButtonMenuItem   id="swap-nav-link" to="/swap" as={Link}>
           {t('Swap')}
         </ButtonMenuItem>
         <ButtonMenuItem id="pool-nav-link" to="/pool" as={Link}>

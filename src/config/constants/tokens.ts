@@ -13,7 +13,7 @@ export const CAKE: { [chainId: number]: Token } = {
     '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     18,
     'CAKE',
-    'PancakeSwap Token',
+    'FreeUbiSwap Token',
   ),
 }
 export const BUSD: { [chainId: number]: Token } = {
