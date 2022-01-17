@@ -25,17 +25,18 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
       }, */
     ],
   },
- /*  {
+   {
     label: t('Farms'),
     icon: 'FarmIcon',
     href: '/farms',
-  }, */
+  }, 
   {
     label: t('Pools'),
     icon: 'PoolIcon',
     href: '/pools',
   },
-  /* {
+  
+ /*  {
     label: t('Prediction (BETA)'),
     icon: 'PredictionsIcon',
     href: '/prediction',
@@ -44,13 +45,13 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     label: t('Lottery'),
     icon: 'TicketIcon',
     href: '/lottery',
-  },
+  }, */
   {
-    label: t('Collectibles'),
+    label: t('NFTS'),
     icon: 'NftIcon',
     href: '/collectibles',
   },
-  {
+  /* {
     label: t('Team Battle'),
     icon: 'TeamBattleIcon',
     href: '/competition',
@@ -77,12 +78,12 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     label: t('Info'),
     icon: 'InfoIcon',
     href: 'https://pancakeswap.info',
-  },
-  {
-    label: t('IFO'),
-    icon: 'IfoIcon',
-    href: '/ifo',
   }, */
+  {
+    label: t('INFO'),
+    icon: 'IfoIcon',
+    href: 'https://www.freeubi.org',
+  }, 
   /* {
     label: t('More'),
     icon: 'MoreIcon',

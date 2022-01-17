@@ -387,15 +387,15 @@ const Farms: React.FC = () => {
           {t('Farms')}
         </Heading>
         <Heading scale="lg" color="text">
-          {t('Stake LP tokens to earn.')}
+          {t('Stake LP tokens to earn FUBI.')}
         </Heading>
         <NavLink exact activeClassName="active" to="/farms/auction" id="lottery-pot-banner">
-          <Button p="0" variant="text">
+          {/* <Button p="0" variant="text">
             <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Community Auctions')}
-            </Text>
+            </Text>  
             <ArrowForwardIcon color="primary" />
-          </Button>
+          </Button> */}
         </NavLink>
       </PageHeader>
       <Page>
@@ -450,7 +450,7 @@ const Farms: React.FC = () => {
           </Flex>
         )}
         <div ref={loadMoreRef} />
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
+        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={180} height={180} />
       </Page>
     </>
   )
