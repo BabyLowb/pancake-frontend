@@ -26,6 +26,26 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wbnb,
   },
   {
+    pid: 3,
+    lpSymbol: 'FUBI-BNB LP',
+    lpAddresses: {
+      97: '0x3ed8936cAFDF85cfDBa29Fbe5940A5b0524824F4',
+      56: '0xD212a2ce9440956B30b8a7187899D44Bd7b69497',
+    },
+    token: tokens.cake,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 4,
+    lpSymbol: 'FUBI-USDT LP',
+    lpAddresses: {
+      97: '0x3ed8936cAFDF85cfDBa29Fbe5940A5b0524824F4',
+      56: '0x15B97EB7070091C5Ea40F7aeFaB29E150E53a209',
+    },
+    token: tokens.cake,
+    quoteToken: tokens.usdt,
+  },
+  {
     pid: 1,
     lpSymbol: 'BUSD-BNB LP',
     lpAddresses: {

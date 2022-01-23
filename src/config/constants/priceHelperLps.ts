@@ -20,7 +20,7 @@ const priceHelperLps: FarmConfig[] = [
     quoteToken: tokens.wbnb,
   },
   {
-    pid: null,
+    pid: 1,
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {
       97: '0xf63bb38ad273b1f8c1bfdf4a3d2231a919acd835',

@@ -387,8 +387,14 @@ const Farms: React.FC = () => {
           {t('Farms')}
         </Heading>
         <Heading scale="lg" color="text">
-          {t('Stake LP tokens to earn FUBI.')}
+          {t('Stake LP tokens to earn FUBI.')} 
         </Heading>
+        <Text>
+          {t(' Next tax free transaction :')} 
+        </Text>
+        <Text>
+          {t('2022-02-20 20:00-24:00')} 
+        </Text>
         <NavLink exact activeClassName="active" to="/farms/auction" id="lottery-pot-banner">
           {/* <Button p="0" variant="text">
             <Text color="primary" bold fontSize="16px" mr="4px">
